@@ -81,7 +81,9 @@ arun:
 	.$(ACTIVATE); PYTHONDONTWRITEBYTECODE=1 uvicorn --app-dir src app:app --reload --port 18050
 	litestar --app-dir src run --port 18050
 
-tbot: . $(ACTIVATE);
+tbot:
+	echo "start telegram bot prod"
+	. $(ACTIVATE); ENV=prod python src/bot/main.py
 
 copy_gitignore:	## - copy .gitignore file from public_gitignore repo
 	git fetch git@github.com:and-is-me/public_gitignore.git main:public_gitignore
