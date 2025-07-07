@@ -27,6 +27,7 @@ mv  "project.mk" "Makefile"
 git add Makefile
 git commit -m "grabbed project.mk->Makefile from public_makefile_python_microservice repo"
 git push
+git remote remove public_makefile_python_microservice
 ```
 
 via https
@@ -37,4 +38,5 @@ mv  "project.mk" "Makefile"
 git add Makefile
 git commit -m "grabbed project.mk->Makefile from public_makefile_python_microservice repo"
 git push
+git remote remove public_makefile_python_microservice
 ```

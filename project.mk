@@ -19,6 +19,7 @@ help:		## - display all commands
 venv: 	## - prepare env and install requirements
 	mkdir -p ${ENV_PATH_}
 	python3 -m venv ${ENV_PATH_}/venv
+	. $(ACTIVATE); pip3 install --upgrade pip
 	make install
 install: 	## - install requirements
 	. $(ACTIVATE); pip install -r src/requirements.txt
@@ -38,50 +39,30 @@ migrations:
 	@#litestar --app-dir src database make-migrations
 	@#alembic revision --autogenerate
 	@#alembic revision --autogenerate -m  "init"
-mig: migrations
-
+mig: migrations	## - make migrations
 migrate:
-
 	@echo 'Upgrade "migrate" command' > logfile.log
 	exit 125
-
 	#litestar database upgrade --no-prompt
 	#litestar --app-dir src database upgrade head
 	@litestar --app-dir src database upgrade --no-prompt
 	#litestar --app-dir src run
-
-migrations:	## - create migrations
-	echo 'Upgrade "migrate" command' > logfile.log
-	exit 125
-	#@litestar database upgrade --no-prompt
-	#@litestar --app-dir src database upgrade head
-	@litestar --app-dir src database upgrade --no-prompt
-	#@litestar --app-dir src runm: migrate
-	#@alembic init alembic
-	#@alembic revision --autogenerate
-	#@alembic revision --autogenerate -m 'init'
-migrate:
-	echo 'Upgrade "migrate" command' > logfile.log
-	exit 125
-	@litestar --app-dir src database upgrade --no-prompt
-	#@alembic upgrade head --sql
-	#@alembic upgrade head
-	#@alembic upgrade 1
-downgrade:
+m: migrate		## - migrate
+downgrade:		## - downgrade migrations
 	echo 'Upgrade "downgrade" command' > logfile.log
 	exit 125
 	@litestar --app-dir src database downgrade --no-prompt
 	#@alembic downgrade -1
 	#@alembic history
 	#@alembic downgrade 8ac14e223d1e
-run:		## - run server
+run:		## - run sync server
 	. $(ACTIVATE); src/manage.py runserver 18040
-arun:
+arun:		## - run async server
 	echo "uvicorn runserver"
 	.$(ACTIVATE); PYTHONDONTWRITEBYTECODE=1 uvicorn --app-dir src app:app --reload --port 18050
 	litestar --app-dir src run --port 18050
 
-tbot:
+tbot:		## - run telegram bot
 	echo "start telegram bot prod"
 	. $(ACTIVATE); ENV=prod python src/bot/main.py
 
