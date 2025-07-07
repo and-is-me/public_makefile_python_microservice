@@ -1,6 +1,4 @@
 
-# this is
-
 help:	## - show this help
 	@echo ""
 	@echo "Commands:"
