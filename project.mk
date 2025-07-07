@@ -16,13 +16,15 @@ help:		## - display all commands
 	@echo ""
 	@echo "Commands:"
 	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
-prepare: 	## - prepare env and install requirements
+venv: 	## - prepare env and install requirements
 	mkdir -p ${ENV_PATH_}
 	python3 -m venv ${ENV_PATH_}/venv
 	make install
 install: 	## - install requirements
 	. $(ACTIVATE); pip install -r src/requirements.txt
 i: install
+uninstall: 	## - uninstall all dependencies
+	 pip freeze | xargs pip uninstall --yes
 style_check:	## - check style
 	echo "run style ruff  check"
 	. $(ACTIVATE); ruff check
