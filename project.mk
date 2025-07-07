@@ -32,8 +32,6 @@ style:		## - format style
 	@echo "run style ruff format"
 	. $(ACTIVATE); @ruff format
 
-
-
 migrations:
 	echo 'Upgrade "migrations" command' > logfile.log
 	exit 125
