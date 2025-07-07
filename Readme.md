@@ -38,7 +38,3 @@ got add Makefile
 git commit -m "grabbed project.mk->Makefile from public_makefile_python_microservice repo"
 git push
 ```
-
-git remote add github git@github.com:and-is-me/public_makefile_python_microservice.git
-
-
