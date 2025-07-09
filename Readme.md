@@ -19,8 +19,11 @@ after copy visit Makefile, check `prepare` instruction, you might would like to 
 copy and paste command in terminal 
 
 
+
+### github
+
 via ssh
-```
+```bash
 git fetch git@github.com:and-is-me/public_makefile_python_microservice.git main:public_makefile_python_microservice
 git checkout public_makefile_python_microservice -- project.mk
 mv  "project.mk" "Makefile"
@@ -31,7 +34,7 @@ git remote remove public_makefile_python_microservice
 ```
 
 via https
-```
+```bash
 git fetch https://github.com/and-is-me/public_makefile_python_microservice.git main:public_makefile_python_microservice
 git checkout public_makefile_python_microservice -- project.mk
 mv  "project.mk" "Makefile"
@@ -39,4 +42,15 @@ git add Makefile
 git commit -m "grabbed project.mk->Makefile from public_makefile_python_microservice repo"
 git push
 git remote remove public_makefile_python_microservice
+```
+
+
+### gitlab
+
+via ssh
+```bash
+git archive --remote=git@gitlab.com:and_me_group_submodules/public_makefile_python_microservice.git main project.mk | tar xvf -
+mv  "project.mk" "Makefile"
+git commit -m "grabbed project.mk->Makefile from public_makefile_python_microservice repo"
+git push
 ```
